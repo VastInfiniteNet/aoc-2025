@@ -1,0 +1,11 @@
+*
+
+# source files
+!*/
+!**/*.c
+
+# makefile
+!makefile
+
+#ignore
+!.gitignore
