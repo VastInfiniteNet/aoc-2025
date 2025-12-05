@@ -93,7 +93,7 @@ int main()
 
     while ((c = fgetc(f)) != EOF) { // read in floor plan
         if (c == '\n') { // add char to last line
-            currPtr += sizeof c;
+            currPtr++;
             continue;
         }
         *(currPtr++) = c;
