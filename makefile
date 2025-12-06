@@ -1,6 +1,6 @@
 CC=gcc
 FLAGS=-Wextra -Wall -g
-TARGETS = 1 2 3 4 5
+TARGETS = 1 2 3 4 5 6
 
 .PHONY: all clean
 

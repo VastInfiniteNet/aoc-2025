@@ -7,8 +7,7 @@
 int compareRanges(const void *a, const void *b) {
     size_t startA = ((size_t *)a)[0];
     size_t startB = ((size_t *)b)[0];
-    printf("Comparing %zu and %zu\n", startA, startB);
-    return startA - startB;
+    return (startA > startB) - (startA < startB);
 }
 
 int main()
