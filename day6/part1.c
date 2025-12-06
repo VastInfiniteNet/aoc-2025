@@ -11,7 +11,6 @@ int main()
     FILE *f;
     size_t result, num, problem_count;
     const char *INPUT_FILE = "day6/input.1"; // PLEASE CHGANGE EVERY DAY
-    // THere is no operands with value of 0 in example or problem input
     size_t *curr_op;
     char nextc;
 
@@ -60,6 +59,7 @@ int main()
         }
         // end of line
         curr_op += 2; // idk man, WHAT DID I DO WRONG
+        // Issue is something due to memory allocated.
         nextc = fgetc(f);
         if ('*' <= nextc &&  nextc < '0') {// start of next line, if operator stop looking for operands
             fseek(f, -1, SEEK_CUR); // dont skip first operator
@@ -78,7 +78,7 @@ int main()
 
     num = 0;
     size_t problem_answer;
-    while (fscanf(f, "%c", &nextc) != EOF) { // read and store the ith operand of all problems
+    while (fscanf(f, "%c", &nextc) != EOF) { // do the math on each problem
         if (nextc == ' ')
             continue;
         printf("Applying op '%c' to problem %zu\n", nextc, num);
@@ -99,7 +99,7 @@ int main()
     // clean up
     fclose(f);
     for (size_t i = 0; i < OPERAND_COUNT; i++)
-        free(problems[i]); // no need to zero, overwriting all
+        free(problems[i]);
 
     printf("Result: %lu\n", result);
     return 0;
