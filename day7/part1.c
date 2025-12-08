@@ -6,16 +6,16 @@
 #define BEAM '|'
 #define SPACE '.'
 
-void progress(char *prev, char *curr, int width, size_t *result) {
+void progress(char *prev, char *curr, size_t *result) {
     printf("\nProgressing:%lu\n'%s'\n'%s'\n", *result, prev, curr);
-    for (int i = 0; i < width; i++) {
+    for (int i = 0; prev[i] != '\0'; i++) {
         printf("%d: %c", i, prev[i]);
         if (prev[i] != BEAM)
             continue;
         if (curr[i] == SPLITTER) { // split beam
             if (i > 0 && curr[i - 1] == SPACE) // split left
                 curr[i - 1] = BEAM;
-            if (i + 1 < width && curr[i + 1] == SPACE) // split right
+            if (curr[i + 1] == SPACE) // split right
                 curr[i + 1] = BEAM;
             (*result)++;
             continue;
@@ -23,7 +23,7 @@ void progress(char *prev, char *curr, int width, size_t *result) {
         curr[i] = BEAM; // continue beam
     }
     printf("\nProgressed to:%lu\n'%s'\n'%s'\n\n", *result, prev, curr);
-    for (int i = 0; i < width; i++) {
+    for (int i = 0; prev[i] != '\0'; i++) {
         prev[i] = curr[i];
         curr[i] = 0;
     }
@@ -56,7 +56,7 @@ int main()
     while ((c = fgetc(f)) != EOF) { // prase and process available ids
         printf("char: %c ", c);
         if (c == '\n') {  // if newline progress lines
-            progress(prev, curr, width, &result);
+            progress(prev, curr, &result);
             pos = 0;
             continue;
         }
